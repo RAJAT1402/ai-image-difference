@@ -9,12 +9,12 @@ const s3 = new AWS.S3({
   secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
 });
 
-@Controller('/api')
+@Controller()
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
 
-  @Get('/hello')
+  @Get()
   getHello(): string {
     return this.appService.getHello();
   }

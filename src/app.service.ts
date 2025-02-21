@@ -10,7 +10,7 @@ const s3 = new AWS.S3({
 @Injectable()
 export class AppService {
 
-  private openai = new OpenAI({ apiKey: process.env.openai });
+  // private openai = new OpenAI({ apiKey: process.env.openai });
 
   getHello(): string {
     return 'Hello World!';
