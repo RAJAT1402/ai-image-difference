@@ -45,7 +45,7 @@ export class AppController {
           throw new BadRequestException('Invalid File Type: ' + file.originalname);
         }
 
-        const bucketFileName = `New_Project/${Date.now()}-${file.originalname}`;
+        const bucketFileName = `New_Project/ai-image/${Date.now()}-${file.originalname}`;
         const params = {
           Bucket: bucket,
           Key: bucketFileName,
