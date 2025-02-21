@@ -36,7 +36,9 @@ export class AppService {
     console.log("🚀 ~ AppService ~ processImages ~ prompt:", promptNumber , "  " , prompt)
 
     console.log("Images ", images);
-  
+    
+    console.log("Images 1", images[0]);
+
     const response = await this.openai.chat.completions.create({
       model: "gpt-4-turbo",
       messages: [
@@ -45,8 +47,8 @@ export class AppService {
           content: [
             { type: "text", text: prompt },
             { type: "image_url", image_url: { url: images[0] } }, // First image
-            { type: "image_url", image_url: { url: images[1] } }, // Second image
-            { type: "image_url", image_url: { url: images[2] } }  // Third image
+            // { type: "image_url", image_url: { url: images[1] } }, // Second image
+            // { type: "image_url", image_url: { url: images[2] } }  // Third image
           ],
         },
       ],
