@@ -23,9 +23,11 @@ export class AppController {
   @UseInterceptors(FilesInterceptor('files', 3)) // Allow up to 3 files
   async upload(
     @UploadedFiles() files: any,
+    @Body("promptNumber") promptNumber: any
   ) {
+    console.log("🚀 ~ AppController ~ promptNumber:", promptNumber)
     console.log('Received files:', files);
-
+    
     const fileTypesAllowed = ['jpeg', 'png', 'jpg', 'heic', 'heif'];
 
     // Check if exactly 3 files are uploaded
@@ -61,7 +63,7 @@ export class AppController {
       console.log('Uploaded Image URLs:', uploadedUrls);
 
       // Call your service function with the image URLs
-      const response = await this.appService.processImages(uploadedUrls, "");
+      const response = await this.appService.processImages(uploadedUrls, promptNumber);
 
       return { success: true, images: uploadedUrls, response };
     } catch (e) {

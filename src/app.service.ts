@@ -16,7 +16,25 @@ export class AppService {
     return 'Hello World!';
   }
 
-  async processImages(images: string[], prompt: string) {
+  async processImages(images: string[], promptNumber: number) {
+
+    let prompt = "";
+    
+    
+    switch(promptNumber){
+      case 1 : prompt = "Compare the number of items in all provided images. Identify if any items are missing or extra in any image. Provide a percentage match for quantity consistency.";
+              break;
+
+      case 2 : prompt = "Identify and list the different product variations across all images. Ensure the product names and types match across images. Highlight any inconsistencies or missing variations.";
+              break;
+
+      case 3 : prompt = "Examine the images for any visible damage to item packaging. Report any tears, leaks, or significant wrinkles, specifying the affected item and nature of damage.";
+              break;
+    }
+
+
+    console.log("🚀 ~ AppService ~ processImages ~ prompt:", promptNumber , "  " , prompt)
+
     console.log("Images ", images);
     return images;
     // const response = await this.openai.chat.completions.create({
