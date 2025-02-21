@@ -41,7 +41,7 @@ export class AppService {
     const fixedImages = images.map(url => url.replace(/\.$/, ''));
 
     const response = await this.openai.chat.completions.create({
-      model: "gpt-4-turbo",
+      model: "gpt-4-vision-preview",
       messages: [
         {
           role: "user",
