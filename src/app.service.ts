@@ -38,6 +38,7 @@ export class AppService {
     console.log("Images ", images);
     
     console.log("Images 1", images[0]);
+    const fixedImages = images.map(url => url.replace(/\.$/, ''));
 
     const response = await this.openai.chat.completions.create({
       model: "gpt-4-turbo",
@@ -46,9 +47,9 @@ export class AppService {
           role: "user",
           content: [
             { type: "text", text: prompt },
-            { type: "image_url", image_url: { url: images[0] } }, // First image
-            // { type: "image_url", image_url: { url: images[1] } }, // Second image
-            // { type: "image_url", image_url: { url: images[2] } }  // Third image
+            { type: "image_url", image_url: { url: fixedImages[0] } }, // First image
+            { type: "image_url", image_url: { url: fixedImages[1] } }, // Second image
+            { type: "image_url", image_url: { url: fixedImages[2] } }  // Third image
           ],
         },
       ],
