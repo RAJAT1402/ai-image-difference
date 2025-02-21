@@ -19,11 +19,10 @@ export class AppController {
     return this.appService.getHello();
   }
 
-  @Post()
+  @Post("/image")
   @UseInterceptors(FilesInterceptor('files', 3)) // Allow up to 3 files
   async upload(
     @UploadedFiles() files: any,
-    @Body('fileType') fileType: string
   ) {
     console.log('Received files:', files);
 
