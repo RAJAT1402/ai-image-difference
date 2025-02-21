@@ -36,32 +36,33 @@ export class AppService {
     console.log("🚀 ~ AppService ~ processImages ~ prompt:", promptNumber , "  " , prompt)
 
     console.log("Images ", images);
-    return prompt;
-    // const response = await this.openai.chat.completions.create({
-    //   model: "gpt-4-turbo",
-    //   messages: [
-    //     {
-    //       role: "user",
-    //       content: [
-    //         { type: "text", text: prompt },
-    //         { type: "image_url", image_url: { url: images[0] } }, // First image
-    //         { type: "image_url", image_url: { url: images[1] } }, // Second image
-    //         { type: "image_url", image_url: { url: images[2] } }  // Third image
-    //       ],
-    //     },
-    //   ],
-    //   max_tokens: 300,
-    //   temperature: 0.7,
-    // });
+  
+    const response = await this.openai.chat.completions.create({
+      model: "gpt-4-turbo",
+      messages: [
+        {
+          role: "user",
+          content: [
+            { type: "text", text: prompt },
+            { type: "image_url", image_url: { url: images[0] } }, // First image
+            { type: "image_url", image_url: { url: images[1] } }, // Second image
+            { type: "image_url", image_url: { url: images[2] } }  // Third image
+          ],
+        },
+      ],
+      max_tokens: 300,
+      temperature: 0.7,
+    });
     
-    // console.log("🚀 ~ UploadService ~ extractPersonInfo ~ response:", response);
+    console.log("🚀 ~ UploadService ~ extractPersonInfo ~ response:", response);
     
-    // // Parse and return the JSON response
-    // const content = response.choices[0]?.message?.content;
-    // if (!content) {
-    //   throw new Error("No content returned by OpenAI API");
-    // }
+    // Parse and return the JSON response
+    const content = response.choices[0]?.message?.content;
+    console.log("🚀 ~ AppService ~ processImages ~ content:", content)
+    if (!content) {
+      throw new Error("No content returned by OpenAI API");
+    }
     
-    // return content;
+    return content;
   }
 }
