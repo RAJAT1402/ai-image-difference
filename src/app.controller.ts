@@ -40,27 +40,27 @@ export class AppController {
     const uploadedUrls: string[] = [];
 
     try {
-      for (const file of files) {
-        const fileTypeCheck = file.mimetype.split('/')[1];
-        if (!fileTypesAllowed.includes(fileTypeCheck)) {
-          throw new BadRequestException('Invalid File Type: ' + file.originalname);
-        }
+      // for (const file of files) {
+      //   const fileTypeCheck = file.mimetype.split('/')[1];
+      //   if (!fileTypesAllowed.includes(fileTypeCheck)) {
+      //     throw new BadRequestException('Invalid File Type: ' + file.originalname);
+      //   }
 
-        const bucketFileName = `New_Project/ai-image/${Date.now()}-${file.originalname}`;
-        const params = {
-          Bucket: bucket,
-          Key: bucketFileName,
-          Body: file.buffer,
-          ContentType: file.mimetype,
-          ACL: acl,
-        };
+      //   const bucketFileName = `New_Project/ai-image/${Date.now()}-${file.originalname}`;
+      //   const params = {
+      //     Bucket: bucket,
+      //     Key: bucketFileName,
+      //     Body: file.buffer,
+      //     ContentType: file.mimetype,
+      //     ACL: acl,
+      //   };
 
-        console.log('Uploading to S3:', params);
-        const uploadS3 = await s3.upload(params).promise();
-        uploadedUrls.push(uploadS3.Location); // Get the uploaded URL
-      }
+      //   console.log('Uploading to S3:', params);
+      //   const uploadS3 = await s3.upload(params).promise();
+      //   uploadedUrls.push(uploadS3.Location); // Get the uploaded URL
+      // }
 
-      console.log('Uploaded Image URLs:', uploadedUrls);
+      // console.log('Uploaded Image URLs:', uploadedUrls);
 
       // Call your service function with the image URLs
       const response = await this.appService.processImages(uploadedUrls, promptNumber);
