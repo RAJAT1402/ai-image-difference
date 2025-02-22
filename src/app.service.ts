@@ -36,44 +36,47 @@ export class AppService {
     console.log("🚀 ~ AppService ~ processImages ~ prompt:", promptNumber , "  " , prompt)
 
     console.log("Images ", images);
-  
-    // const fixedImages = images.map(url => url.replace(/\.$/, ''));
-    // console.log("🚀 ~ AppService ~ processImages ~ fixedImages:", fixedImages)
+    
+
     // Convert single-quoted URLs to double-quoted ones
     const formattedImages = images.map(url => url.replace(/^'|'$/g, '"'));
     console.log("🚀 ~ AppService ~ processImages ~ formattedImages:", formattedImages)
 
-    const response = await this.openai.chat.completions.create({
-      model: "gpt-4o",
-      messages: [
-        {
-          role: "user",
-          content: [
-            // { type: "text", text: "Analyize the photo" },
-            { type: "text", text: prompt },
-            // { type: "image_url", image_url: { url: "https://zorro-bucket.s3.amazonaws.com/New_Project/ai-image/1740208185920-IMG_0123.jpg" } }, // First image
-            // { type: "image_url", image_url: { url: "https://zorro-bucket.s3.ap-south-1.amazonaws.com/New_Project/ai-image/1740208187631-IMG_0124.jpg" } }, // First image
-            // { type: "image_url", image_url: { url: "https://zorro-bucket.s3.ap-south-1.amazonaws.com/New_Project/ai-image/1740208188419-IMG_0127.jpg" } }, // First image
+
+    console.log("🚀 Debug JSON:", JSON.stringify({ type: "image_url", image_url: { url: formattedImages[0] } }, null, 2));
+
+    return formattedImages;
+    // const response = await this.openai.chat.completions.create({
+    //   model: "gpt-4o",
+    //   messages: [
+    //     {
+    //       role: "user",
+    //       content: [
+    //         // { type: "text", text: "Analyize the photo" },
+    //         { type: "text", text: prompt },
+    //         // { type: "image_url", image_url: { url: "https://zorro-bucket.s3.amazonaws.com/New_Project/ai-image/1740208185920-IMG_0123.jpg" } }, // First image
+    //         // { type: "image_url", image_url: { url: "https://zorro-bucket.s3.ap-south-1.amazonaws.com/New_Project/ai-image/1740208187631-IMG_0124.jpg" } }, // First image
+    //         // { type: "image_url", image_url: { url: "https://zorro-bucket.s3.ap-south-1.amazonaws.com/New_Project/ai-image/1740208188419-IMG_0127.jpg" } }, // First image
           
-            { type: "image_url", image_url: { url: formattedImages[0] } }, // First image
-            { type: "image_url", image_url: { url: formattedImages[1] } }, // Second image
-            { type: "image_url", image_url: { url: formattedImages[2] } }  // Third image
-          ],
-        },
-      ],
-      max_tokens: 300,
-      temperature: 0.7,
-    });
+    //         { type: "image_url", image_url: { url: formattedImages[0] } }, // First image
+    //         { type: "image_url", image_url: { url: formattedImages[1] } }, // Second image
+    //         { type: "image_url", image_url: { url: formattedImages[2] } }  // Third image
+    //       ],
+    //     },
+    //   ],
+    //   max_tokens: 300,
+    //   temperature: 0.7,
+    // });
     
-    console.log("🚀 ~ UploadService ~ extractPersonInfo ~ response:", response);
+    // console.log("🚀 ~ UploadService ~ extractPersonInfo ~ response:", response);
     
-    // Parse and return the JSON response
-    const content = response.choices[0]?.message?.content;
-    console.log("🚀 ~ AppService ~ processImages ~ content:", content)
-    if (!content) {
-      throw new Error("No content returned by OpenAI API");
-    }
+    // // Parse and return the JSON response
+    // const content = response.choices[0]?.message?.content;
+    // console.log("🚀 ~ AppService ~ processImages ~ content:", content)
+    // if (!content) {
+    //   throw new Error("No content returned by OpenAI API");
+    // }
     
-    return content;
+    // return content;
   }
 }
