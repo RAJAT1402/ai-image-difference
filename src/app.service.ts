@@ -41,15 +41,16 @@ export class AppService {
     const fixedImages = images.map(url => url.replace(/\.$/, ''));
 
     const response = await this.openai.chat.completions.create({
-      model: "gpt-4-vision-preview",
+      model: "gpt-4o",
       messages: [
         {
           role: "user",
           content: [
-            { type: "text", text: prompt },
-            { type: "image_url", image_url: { url: fixedImages[0] } }, // First image
-            { type: "image_url", image_url: { url: fixedImages[1] } }, // Second image
-            { type: "image_url", image_url: { url: fixedImages[2] } }  // Third image
+            { type: "text", text: "Analyize the photo" },
+            // { type: "text", text: prompt },
+            { type: "image_url", image_url: { url: "https://zorro-bucket.s3.amazonaws.com/New_Project/ai-image/1740138665807-IMG_0123.jpg" } }, // First image
+            // { type: "image_url", image_url: { url: fixedImages[1] } }, // Second image
+            // { type: "image_url", image_url: { url: fixedImages[2] } }  // Third image
           ],
         },
       ],
