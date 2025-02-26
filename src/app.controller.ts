@@ -46,7 +46,11 @@ export class AppController {
     console.log('Uploading to S3:', params);
     const uploadS3 = await s3.upload(params).promise();
 
-    return uploadS3.Location;
+    return {
+      code: 200,
+      message: "image uploaded success",
+      data: uploadS3.Location
+    };
   }
 
   @Post("/image/difference")
@@ -57,7 +61,12 @@ export class AppController {
     const response = await this.appService.processImages(images, promptNumber);
     console.log("🚀 ~ AppController ~ matchImages ~ response:", response)
 
-    return { success: true, response };
+    return {
+      code: 200,
+      message: "image uploaded success",
+      data: response
+    };
+
   }
 
   @Post("/image")
