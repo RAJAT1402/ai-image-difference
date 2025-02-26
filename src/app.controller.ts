@@ -24,6 +24,7 @@ export class AppController {
   async uplaodImage(
     @UploadedFile() image: any,
   ){
+    console.log("🚀 ~ AppController ~ image:", image)
     const fileTypesAllowed = ['jpeg', 'png', 'jpg', 'heic', 'heif'];
     const bucket = 'zorro-bucket';
     const acl = 'public-read';
