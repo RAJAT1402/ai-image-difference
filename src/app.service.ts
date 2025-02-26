@@ -58,7 +58,7 @@ export class AppService {
           content: [
             { type: "text", text: "Analyize the photo" },
             // { type: "text", text: prompt },
-            { type: "image_url", image_url: { url: "https://zorro-bucket.s3.amazonaws.com/New_Project/ai-image/1740208185920-IMG_0123.jpg" } }, // First image
+            { type: "image_url", image_url: { url: "https://zorro-bucket.s3.ap-south-1.amazonaws.com/New_Project/ai-image/imag_2.jpg" } }, // First image
             // { type: "image_url", image_url: { url: "https://zorro-bucket.s3.ap-south-1.amazonaws.com/New_Project/ai-image/1740208187631-IMG_0124.jpg" } }, // First image
             // { type: "image_url", image_url: { url: "https://zorro-bucket.s3.ap-south-1.amazonaws.com/New_Project/ai-image/1740208188419-IMG_0127.jpg" } }, // First image
           
