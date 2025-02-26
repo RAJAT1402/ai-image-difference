@@ -19,6 +19,46 @@ export class AppController {
     return this.appService.getHello();
   }
 
+  @Post("/uploadImage")
+  @UseInterceptors(FileInterceptor('image'))
+  async uplaodImage(
+    @UploadedFile() image: any,
+  ){
+    const fileTypesAllowed = ['jpeg', 'png', 'jpg', 'heic', 'heif'];
+    const bucket = 'zorro-bucket';
+    const acl = 'public-read';
+
+    const fileTypeCheck = image.mimetype.split('/')[1];
+    if (!fileTypesAllowed.includes(fileTypeCheck)) {
+      throw new BadRequestException('Invalid File Type: ' + image.originalname);
+    }
+
+    const bucketFileName = `New_Project/ai-image/${Date.now()}-${image.originalname}`;
+    const params = {
+      Bucket: bucket,
+      Key: bucketFileName,
+      Body: image.buffer,
+      ContentType: image.mimetype,
+      ACL: acl,
+    };
+
+    console.log('Uploading to S3:', params);
+    const uploadS3 = await s3.upload(params).promise();
+
+    return uploadS3.Location;
+  }
+
+  @Post("/image/difference")
+  async matchImages(@Body() body: any){
+    console.log("🚀 ~ AppController ~ matchImages ~ body:", body)
+    const [images, promptNumber] = body;
+
+    const response = await this.appService.processImages(images, promptNumber);
+    console.log("🚀 ~ AppController ~ matchImages ~ response:", response)
+
+    return { success: true, response };
+  }
+
   @Post("/image")
   @UseInterceptors(FilesInterceptor('files', 3)) // Allow up to 3 files
   async upload(
