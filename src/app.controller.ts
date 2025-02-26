@@ -51,7 +51,7 @@ export class AppController {
   @Post("/image/difference")
   async matchImages(@Body() body: any){
     console.log("🚀 ~ AppController ~ matchImages ~ body:", body)
-    const [images, promptNumber] = body;
+    const {images, promptNumber} = body;
 
     const response = await this.appService.processImages(images, promptNumber);
     console.log("🚀 ~ AppController ~ matchImages ~ response:", response)
