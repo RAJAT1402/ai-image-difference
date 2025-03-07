@@ -17,6 +17,7 @@ export class AppService {
   }
 
   async processImages(images: string[], promptNumber: string) {
+  console.log("🚀 ~ AppService ~ processImages ~ promptNumber:", promptNumber, " ", typeof promptNumber)
 
     let prompt = "";
     
