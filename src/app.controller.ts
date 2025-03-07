@@ -57,7 +57,8 @@ export class AppController {
   async matchImages(@Body() body: any){
     console.log("🚀 ~ AppController ~ matchImages ~ body:", body)
     const {images, promptNumber} = body;
-
+    console.log("🚀 ~ AppController ~ matchImages ~ promptNumber:", promptNumber, "   " , typeof promptNumber)
+    
     const response = await this.appService.processImages(images, promptNumber);
     console.log("🚀 ~ AppController ~ matchImages ~ response:", response)
 
